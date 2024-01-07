@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// enum Category {
+//   HISTORY
+//   GEOGRAPHY
+//   TECH
+//   MATH
+//   SCIENCE
+//   GAMING
+//   ANIME
+//   POP
+//   TRIVIA
+// }
+
+model User {
+  id           Int            @id @default(autoincrement())
+  username     String         @unique
+  password     String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Score        Score[]
+  UserResponse UserResponse[]
+}
+
+model QuizGroup {
+  id           Int            @id @default(autoincrement())
+  title        String         @unique
+  description  String
+  image        String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Question     Question[]
+  Score        Score[]
+  UserResponse UserResponse[]
+}
+
+model Question {
+  id           Int            @id @default(autoincrement())
+  quizId       Int
+  question     String
+  // category  Category
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  quiz         QuizGroup      @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  Option       Option[]
+  UserResponse UserResponse[]
+}
+
+model Option {
+  id           Int            @id @default(autoincrement())
+  questionId   Int
+  option       String
+  isCorrect    Boolean
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  question     Question       @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  UserResponse UserResponse[]
+}
+
+model UserResponse {
+  id               Int       @id @default(autoincrement())
+  userId           Int
+  quizId           Int
+  questionId       Int
+  selectedOptionId Int
+  isCorrect        Boolean
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  user             User      @relation(fields: [userId], references: [id])
+  quiz             QuizGroup @relation(fields: [quizId], references: [id])
+  question         Question  @relation(fields: [questionId], references: [id])
+  option           Option    @relation(fields: [selectedOptionId], references: [id])
+}
+
+model Score {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  quizId    Int
+  score     Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User      @relation(fields: [userId], references: [id])
+  quiz      QuizGroup @relation(fields: [quizId], references: [id])
+}
