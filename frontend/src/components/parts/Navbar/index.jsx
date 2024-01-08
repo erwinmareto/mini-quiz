@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { deleteCookie } from "cookies-next";
@@ -12,25 +12,28 @@ const Navbar = ({ token }) => {
     router.push("/auth/login");
   };
   return (
-    <nav className="flex justify-between bg-blue-500 p-5">
-      <div className="flex gap-5">
+    <nav className="flex justify-between items-center bg-blue-700 p-5">
+      <div className="flex items-center gap-5">
         <Link href="/">
-          <h1 className="text-xl">Logo</h1>
+          <h1 className="text-xl text-white font-bold">Logo</h1>
         </Link>
-        <Link href="/add/quiz">
-          <h1>Add Quiz</h1>
+        <Link href="/add/quiz" className="text-white hover:underline">
+          Add Quiz
         </Link>
-        <Link href="/leaderboards/1">
-          <h1>Leaderboards</h1>
+        <Link href="/leaderboards/1" className="text-white hover:underline">
+          Leaderboards
         </Link>
       </div>
       {token ? (
-        <button onClick={logout}>
-          <h1>Log Out</h1>
+        <button
+          onClick={logout}
+          className="text-white hover:underline cursor-pointer"
+        >
+          Log Out
         </button>
       ) : (
-        <Link href="/auth/login">
-          <h1>Log In</h1>
+        <Link href="/auth/login" className="text-white hover:underline">
+          Log In
         </Link>
       )}
     </nav>

@@ -6,7 +6,7 @@ import "./styles.css";
 
 register();
 
-const HomePage = ({ quizzes }) => {
+const HomePage = ({ quizzes, username }) => {
   return (
     <>
       <swiper-container
@@ -20,6 +20,7 @@ const HomePage = ({ quizzes }) => {
         {quizzes.map((quiz) => (
           <swiper-slide key={quiz.id}>
             <QuizCard
+              username={username}
               id={quiz.id}
               title={quiz.title}
               description={quiz.description}
