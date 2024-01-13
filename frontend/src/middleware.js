@@ -14,5 +14,5 @@ export function middleware(request) {
 }
 
 export const config = {
-    matcher: ["/quiz/:id*", "/question/*", "edit/:id*", "add/*"],
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
 }
