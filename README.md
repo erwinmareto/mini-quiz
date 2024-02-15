@@ -10,7 +10,7 @@
 ## Clone the repository
 
 ```bash
-git clone https://github.com/erwinmareto/image-sharing.git
+git clone https://github.com/erwinmareto/mini-quiz.git
 ```
 
 ## How To Use
