@@ -6,6 +6,7 @@
 - [Prisma ORM](https://www.prisma.io/)
 - [Next JS](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [SwiperJS](https://swiperjs.com/)
 
 ## Clone the repository
 
